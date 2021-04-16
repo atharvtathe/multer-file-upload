@@ -17,7 +17,8 @@ const storage = multer.diskStorage({
     callback(null, __dirname + '/uploads');
   },
   filename: function (req, file, callback) {
-    callback(null, uuidv4() + file.originalname);
+    let fileFormat = file.mimetype.split('/');
+    callback(null, uuidv4() + '.' + fileFormat[fileFormat.length - 1]);
   }
 });
 
@@ -26,7 +27,7 @@ const upload = multer({storage : storage});
 
 app.post('/uploadfile' ,upload.single('myFile'),  (req, res) => {
     const file = req.file;
-    console.log(file);
+    console.log(file.mimetype);
     res.send(req.file);
     
 });
