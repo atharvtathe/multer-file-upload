@@ -40,8 +40,33 @@ app.post('/uploadfile' ,upload.single('myFile'),  (req, res) => {
     const file = req.file;
     // console.log(file.mimetype);
     // res.send(req.file);
+    // <img src="/images/${file.filename}" alt="filename">
     res.send(`
-    <img src="/images/${file.filename}" alt="filename">
+    
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>file</title>
+    <style>
+      img {
+        display: block;
+        margin: auto;
+        max-width: 500px;
+        height: auto;
+      }
+      h1 {
+        text-align : center;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Uploaded Image</h1>
+    <img src="/images/${file.filename}" alt="filename" />
+  </body>
+</html>
     `);
 
 });
@@ -49,10 +74,34 @@ app.post('/uploadfile' ,upload.single('myFile'),  (req, res) => {
 app.get('/' , (req, res ) => {
     res.send(`
 
+   <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>file uploader</title>
+    <style>
+        div {
+            margin-top : 100px;
+            text-align: center;
+        }
+         h1 {
+        text-align : center;
+      }
+      
+    </style>
+  </head>
+  <body>
+  <h1> File uploader</h1>
+  <div>
    <form action="/uploadfile" enctype="multipart/form-data" method="POST"> 
    <input type="file" name="myFile" />
    <input type="submit" value="submit"/>
    </form>
+   </div>
+  </body>
+</html>
     `);
 })
 
