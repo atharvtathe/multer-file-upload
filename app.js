@@ -105,6 +105,11 @@ app.get('/' , (req, res ) => {
     `);
 })
 
+
+app.use((req, res) => {
+  res.send("errror..");
+})
+
 const port = process.env.PORT || 3000;
 
 app.listen(port);
